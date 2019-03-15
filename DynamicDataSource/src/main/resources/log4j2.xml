@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<Configuration status="info">  
+    <Appenders>  
+        <Console name="Console" target="SYSTEM_OUT" follow="true">  
+            <PatternLayout>  
+                <pattern>%5p [%t] %d{yyyy-MM-dd HH:mm:ss} %m%n</pattern>  
+            </PatternLayout>  
+        </Console>  
+        <RollingFile name="datasource" immediateFlush="true"
+            fileName="log/datasource/datasource.log" filePattern="log/datasource/datasource - %d{yyyy-MM-dd HH_mm_ss}.log.gz">
+            <PatternLayout>
+                <pattern>%5p [%t] %d{yyyy-MM-dd HH:mm:ss} %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="20MB" />
+            </Policies>
+        </RollingFile>
+        <RollingFile name="framework" immediateFlush="true"
+            fileName="log/framework/framework.log" filePattern="log/framework/framework - %d{yyyy-MM-dd HH_mm_ss}.log.gz">
+            <PatternLayout>
+                <pattern>%5p [%t] %d{yyyy-MM-dd HH:mm:ss} %m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="20MB" />
+            </Policies>
+        </RollingFile>
+    </Appenders>  
+    <Loggers>  
+        <logger name="org.springframework" level="INFO" additivity="true">
+            <AppenderRef ref="framework" />
+        </logger>
+        <logger name="com.elon.dds" level="INFO" additivity="true">
+            <AppenderRef ref="datasource" />
+        </logger> 
+        <Root level="info">  
+            <AppenderRef ref="Console" />  
+        </Root>  
+    </Loggers>  
+</Configuration>  
